@@ -1,0 +1,52 @@
+created: 20260308120000000
+modified: 20260308120000000
+rdt.order: 3
+rdt.plugin-key: explide
+rdt.plugin-name: explide
+rdt.plugin-subtitle: Interactive testcase composition IDE
+rdt.section: Dev Workflow
+title: $:/plugins/rimir/explide/doc/dev-workflow
+type: text/vnd.tiddlywiki
+
+<$transclude $tiddler="$:/plugins/rimir/doc-template/templates/page">
+<$fill $name="body">
+
+!! Plugin files
+
+|!File |!Role |
+|`EXPLIDE.tid` |Main IDE template — config fields, layout toggle, `$testcase` assembly |
+|`variables.tid` |Shared filter functions (`rri.*`) |
+|`core-integration/ViewTemplate.tid` |Hooks into TW ViewTemplate for `rri.type: explide/config` |
+|`ide-templates/tab.tid` |Top-level tab content (CONFIG, ADHOC, DIAGNOSTICS, explide data, imported tiddlers) |
+|`ide-templates/tabButton.tid` |Top-level tab button labels |
+|`ide-templates/explide/tabTemplate.tid` |Explide data sub-tabs (EDITOR, FIELDS, DIFF) with snapshot UI |
+|`ide-templates/config/plugins/tab.tid` |Plugin config — import toggle, shadow tiddler list, delete button, bulk import |
+|`ide-templates/adhoc-tiddlers/tab.tid` |Ad-hoc tiddler editor |
+|`ide-templates/diagnostics/tab.tid` |Diagnostics checks (missing, unused, stale) |
+|`examples/*.json` |Bundled example config tiddlers |
+|`styles/base.css` |Plugin-specific styles (extends `rr-*` from theme) |
+
+!! Restart rules
+
+|!Change |!Restart needed? |
+|Any `.tid` or `.json` file |Yes — plugin shadow tiddlers require restart |
+|`base.css` |Yes — plugin shadow tiddler |
+
+<$transclude $tiddler="$:/plugins/rimir/doc-template/templates/callout" type="tip">
+<$fill $name="body">
+Explide is 100% wikitext — no JS modules at all. However, since all files are plugin shadow tiddlers, a server restart is needed to pick up changes.
+</$fill>
+</$transclude>
+
+!! Dependencies
+
+* ''theme'' — CSS utility classes (`rr-input-row`, `rr-input`, `rr-muted`, `rr-small`, `rr-callout-*`)
+* ''components'' — `tabs` facade component
+* ''shiraz'' — `slider` macro
+
+!! Dev samples
+
+The `_DEV/` directory contains sample config tiddlers and test data for development. These are not included in the published plugin.
+
+</$fill>
+</$transclude>

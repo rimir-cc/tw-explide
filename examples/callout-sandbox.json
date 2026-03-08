@@ -1,0 +1,12 @@
+[
+    {
+        "created": "20260308120000000",
+        "modified": "20260308120000000",
+        "title": "$:/plugins/rimir/explide/examples/callout-sandbox",
+        "type": "text/vnd.tiddlywiki",
+        "description": "Theme callout sandbox — experiment with callout types and content",
+        "rri.type": "explide/config",
+        "rri.imported-plugins": "$:/plugins/rimir/theme",
+        "rri.adhoc-tiddler:Output": "!! Try the callouts\n\n<$list filter=\"info warning tip danger\" variable=\"type\">\n\n<$transclude $tiddler=\"$:/plugins/rimir/theme/callout\" type=<<type>>>\n<$fill $name=\"body\">This is a ''<<type>>'' callout. Edit me!</$fill>\n</$transclude>\n\n</$list>"
+    }
+]

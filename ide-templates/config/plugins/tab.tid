@@ -1,0 +1,53 @@
+code-body: yes
+created: 20260112153045190
+modified: 20260115150217889
+tags: 
+title: $:/plugins/rimir/explide/ide-templates/config/plugins/tab
+type: text/vnd.tiddlywiki
+
+\import $:/plugins/rimir/explide/variables
+
+\procedure rr.ac.add-shadow-tiddler(explideConfigTiddler, shadowTiddler)
+<!--<$rr.dbg text=`Adding $(shadowTiddler)$ to $(explideConfigTiddler)$`/>-->
+
+<$action-createtiddler $template=<<shadowTiddler>> $basetitle=`$(explideConfigTiddler)$/$(shadowTiddler)$`>
+
+</$action-createtiddler>
+
+\end
+
+<$set name="pluginTiddler" value=<<currentTab>>>
+<$checkbox filter="[<explideConfigTiddler>contains:rri.imported-plugins<pluginTiddler>then[yes]else[no]]" checked="yes" unchecked="no" 
+	checkactions="""<$action-listops $tiddler=<<explideConfigTiddler>> $field="rri.imported-plugins" $subfilter=<<pluginTiddler>>/>"""
+	uncheckactions="""<$action-listops $tiddler=<<explideConfigTiddler>> $field="rri.imported-plugins" $subfilter=`-$(pluginTiddler)$`/>"""
+>
+	Include Plugin into Explide?
+</$checkbox><p/>
+<$list filter="[<pluginTiddler>plugintiddlers[]sort[]]" variable="shadowTiddler">
+	<$list filter="[function[rri.explide-tiddlers],<explideConfigTiddler>else[__NONE__]match<shadowTiddler>]">
+		<$button class="tc-btn-invisible" actions="""
+			<$action-deletetiddler $tiddler={{{[<explideConfigTiddler>addsuffix[/]addsuffix<shadowTiddler>]}}}/>
+			<$action-deletetiddler $tiddler={{{[<explideConfigTiddler>addsuffix[/]addsuffix<shadowTiddler>addsuffix<snapshot-suffix>]}}}/>
+		""">{{$:/core/images/delete-button}}</$button> <$link to=<<shadowTiddler>>/><br>
+	</$list>
+</$list>
+<$list filter="[<pluginTiddler>plugintiddlers[]sort[]]" variable="shadowTiddler">
+	<$list filter="[function[rri.explide-tiddlers],<explideConfigTiddler>else[__NONE__]!match<shadowTiddler>]">
+		<$button class="tc-btn-invisible" actions="""<$macrocall $name="rr.ac.add-shadow-tiddler" explideConfigTiddler=<<explideConfigTiddler>> shadowTiddler=<<shadowTiddler>>/>""">{{$:/core/images/new-button}}</$button> <$link to=<<shadowTiddler>>/><br>
+	</$list>
+</$list>
+<<slider label:"Bulk import from filter" src:"""
+<$edit-text tiddler="$:/state/rimir/explide/bulk-import-filter" tag="input" placeholder="[plugintiddlers[]prefix[$:/plugins/...]]" class="rr-input" default=""/>
+<$list filter="[{$:/state/rimir/explide/bulk-import-filter}!is[blank]]" variable="ignored">
+<div class="rr-muted rr-small">Preview:</div>
+<$list filter={{{[{$:/state/rimir/explide/bulk-import-filter}]}}} variable="matchTiddler">
+<div class="rr-small"><$text text=<<matchTiddler>>/></div>
+</$list>
+<$button class="tc-btn-invisible tc-tiddlylink" actions="""
+<$list filter={{{[{$:/state/rimir/explide/bulk-import-filter}]}}} variable="matchTiddler">
+<$macrocall $name="rr.ac.add-shadow-tiddler" explideConfigTiddler=<<explideConfigTiddler>> shadowTiddler=<<matchTiddler>>/>
+</$list>
+""">{{$:/core/images/import-button}} Import All</$button>
+</$list>
+""" labelClass:"rr-muted rr-small" srcClass:"">>
+</$set>

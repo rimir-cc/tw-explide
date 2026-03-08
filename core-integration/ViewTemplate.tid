@@ -1,0 +1,9 @@
+created: 20260112170235039
+modified: 20260115074103429
+tags: $:/tags/ViewTemplate
+title: $:/plugins/rimir/explide/core-integration/ViewTemplate
+type: text/vnd.tiddlywiki
+
+<%if [<currentTiddler>rri.type[explide/config]]%>
+<$transclude $tiddler="$:/plugins/rimir/explide/EXPLIDE"/>
+<%endif%>

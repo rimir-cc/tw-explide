@@ -1,0 +1,52 @@
+created: 20260112073335403
+modified: 20260115154934903
+tags:
+title: $:/plugins/rimir/explide/EXPLIDE
+type: text/vnd.tiddlywiki
+
+\import $:/plugins/rimir/explide/variables
+
+\procedure rri-field-prefix() $rri$:
+
+\procedure explide-data-title() [<currentTiddler>addsuffix[/]]:map[<explideTiddler>removeprefix<currentTiddler>]
+\procedure explide-names() [<explideTiddler>fields[]!prefix<rri-field-prefix>sort[]] -title [<explideTiddler>fields[]sort[]removeprefix<rri-field-prefix>]
+\procedure explide-values() [<explideTiddler>fields[]!prefix<rri-field-prefix>sort[]] -title [<explideTiddler>fields[]prefix<rri-field-prefix>sort[]]:map[<explideTiddler>get<currentTiddler>]
+
+<$button class="tc-btn-invisible tc-tiddlylink" actions="""
+<$action-setfield $tiddler="$:/state/rimir/explide/layout" text={{{[$:/state/rimir/explide/layout>get[text]match[split]then[stacked]] ~[[split]]}}}/>
+"""><%if [[$:/state/rimir/explide/layout]get[text]match[split]]%>Stacked<%else%>Side-by-side<%endif%></$button>
+<$set name="explideLayoutClass" filter="[[$:/state/rimir/explide/layout]get[text]match[split]then[explide-split]]" select="0">
+<div class=<<explideLayoutClass>>>
+<div class="explide-pane-config">
+<$set name="explideConfigTiddler" value=<<currentTiddler>>>
+<<slider label:"Explide Configuration" src:"""
+<div class="explide-config-fields">
+<div class="rr-input-row"><label>Description:</label><$edit-text tiddler=<<explideConfigTiddler>> field="description" tag="input" class="rr-input"/> //<$view tiddler=<<explideConfigTiddler>> field="description"/>//</div>
+<div class="rr-input-row"><label>Output tiddler:</label><$edit-text tiddler=<<explideConfigTiddler>> field="rri.output-tiddler" tag="input" placeholder="Output" default="" class="rr-input"/> <span class="rr-muted rr-small">(default: Output)</span></div>
+</div>
+<$transclude $variable=tabs tabsList="CONFIG ADHOC DIAGNOSTICS [function[rri.explide-data],<currentTiddler>] [function[rri.imported-tiddlers],<currentTiddler>]" template="$:/plugins/rimir/explide/ide-templates/tab" buttonTemplate="$:/plugins/rimir/explide/ide-templates/tabButton"/>""" labelClass:"" srcClass:"">>
+</$set>
+</div>
+<div class="explide-pane-preview">
+<$testcase testcase-output-tiddler={{{[{!!rri.output-tiddler}else[Output]]}}}>
+	<$data title="Description" text={{!!description}}/>
+	<$list filter="[enlist{!!rri.imported-plugins}]">
+		<$data $tiddler=<<currentTiddler>>/>
+	</$list>
+	<$list filter="[function[rri.imported-tiddlers],<currentTiddler>]">
+		<%if [<currentTiddler>type[text/vnd.tiddlywiki-multiple]]%>
+			<$data $compound-tiddler=<<currentTiddler>>/>
+		<%else%>
+			<$data $tiddler=<<currentTiddler>>/>
+		<%endif%>
+	</$list>
+	<$list filter="[function[rri.explide-data],<currentTiddler>]" variable="explideTiddler">
+		<$genesis $type="$data" title={{{<<explide-data-title>>}}} $names=<<explide-names>> $values=<<explide-values>>/>
+	</$list>
+	<$list filter="[<currentTiddler>fields[]prefix<adhoc-field-prefix>]" variable="adhoc-field">
+		<$data title={{{[<adhoc-field>removeprefix<adhoc-field-prefix>]}}} text={{{[<currentTiddler>get<adhoc-field>]}}}/>
+	</$list>
+</$testcase>
+</div>
+</div>
+</$set>

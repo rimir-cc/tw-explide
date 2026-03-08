@@ -1,0 +1,16 @@
+created: 20260308120000000
+modified: 20260308120000000
+title: $:/plugins/rimir/explide/examples
+type: text/vnd.tiddlywiki
+
+! Examples
+
+Bundled explide configs demonstrating key features. Click to open:
+
+<$list filter="[all[shadows+tiddlers]prefix[$:/plugins/rimir/explide/examples/]]">
+<div style="margin: 0.5em 0;">
+<$link/> — <$view field="description"/>
+</div>
+</$list>
+
+Each example uses an ad-hoc tiddler named `Output` as the testcase display tiddler. Open the ADHOC tab to edit the source, or use CONFIG to explore imported plugins.

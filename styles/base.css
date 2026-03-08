@@ -1,0 +1,43 @@
+.rri-adhoc-field textarea {
+	width: 100%;
+}
+
+/* Config fields — extends rr-input-row from theme */
+.explide-config-fields {
+	margin-bottom: 0.5em;
+}
+
+.explide-config-fields .rr-input-row label {
+	white-space: nowrap;
+	min-width: 10em;
+}
+
+.explide-config-fields .rr-input {
+	width: 20em;
+	flex: none;
+}
+
+/* Snapshot controls */
+.explide-snapshot-controls {
+	margin: 0.5em 0;
+	padding: 0.5em 0;
+	border-top: 1px solid <<colour tiddler-controls-foreground>>;
+}
+
+/* Split layout */
+.explide-split {
+	display: flex;
+	gap: 1em;
+}
+
+.explide-split > .explide-pane-config,
+.explide-split > .explide-pane-preview {
+	flex: 1;
+	min-width: 0;
+}
+
+@media (max-width: 768px) {
+	.explide-split {
+		flex-direction: column;
+	}
+}

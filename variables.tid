@@ -1,0 +1,42 @@
+code-body: yes
+created: 20260112144815266
+modified: 20260115152516319
+tags: 
+title: $:/plugins/rimir/explide/variables
+type: text/vnd.tiddlywiki
+
+\procedure snapshot-suffix() :snapshot
+\procedure adhoc-field-prefix() rri.adhoc-tiddler:
+\procedure adhoc-src-field-prefix() rri.adhoc-tiddler-src:
+
+\function rri.pathy-children(tiddler) [prefix<tiddler>]-[<tiddler>]
+
+<!-- Resolves to all classical imported tiddlers -->
+\function rri.imported-tiddlers(explideConfigTiddler) [<explideConfigTiddler>get[rri.imported-tiddlers]enlist-input[]]
+
+<!-- Resolves to all known imported Explide-Data tiddlers (full name) -->
+\function rri.explide-data(explideConfigTiddler) [function[rri.pathy-children],<explideConfigTiddler>!suffix<snapshot-suffix>]
+
+<!-- Resolves to all known imported Explide-Data tiddlers (original name) -->
+\function rri.explide-tiddlers(explideConfigTiddler) [function[rri.explide-data],<explideConfigTiddler>removeprefix<explideConfigTiddler>removeprefix[/]]
+
+<!-- Checks whether or not the given tiddler is Explide-Data in regard to the given config -->
+\function rri.is-explide-data(explideConfigTiddler, tiddler) [<tiddler>removeprefix<explideConfigTiddler>prefix[/]]
+
+<!-- Checks whether or not the given tiddler is Explide-Tiddler in regard to the given config -->
+\function rri.is-explide-tiddler(explideConfigTiddler, tiddler) [function[rri.explide-data],<explideConfigTiddler>match<tiddler>]
+
+<!-- Calculates the original tiddler-title  in regard to the given config -->
+\function rri.get-source-data(explideConfigTiddler, explideDataTiddler) [<explideDataTiddler>removeprefix<explideConfigTiddler>removeprefix[/]]
+
+<!-- Resolves to the source-tiddler of a Explide-Data (whether it is backupped by prefix <<snapshot-suffix>> or not) -->
+\function rri.get-snapshot-data(explideConfigTiddler, explideDataTiddler) [<explideDataTiddler>addsuffix<snapshot-suffix>is[tiddler]]:else[function[rri.get-source-data],<explideConfigTiddler>,<explideDataTiddler>]
+
+<!-- Checks whether or not a given plugin tiddler is directly imported into explide -->
+\function rri.is-plugin-imported(explideConfigTiddler, pluginTiddler) [<explideConfigTiddler>contains:rri.imported-plugins<pluginTiddler>]
+
+<!-- Checks whether or not a shadow-tiddler of the given plugin tiddler is used -->
+\function rri.is-any-plugin-member-used(explideConfigTiddler, pluginTiddler) [function[rri.explide-tiddlers],<explideConfigTiddler>is[shadow]shadowsource[]match<pluginTiddler>]
+
+<!-- Checks whether or not a plugin is directly or indirectly (any shadow-tiddler is used) included -->
+\function rri.is-plugin-involved(explideConfigTiddler, pluginTiddler) [function[rri.is-plugin-imported],<explideConfigTiddler>,<pluginTiddler>] [function[rri.is-any-plugin-member-used],<explideConfigTiddler>,<pluginTiddler>] +[count[]compare:number:gt[0]then[yes]else[no]]

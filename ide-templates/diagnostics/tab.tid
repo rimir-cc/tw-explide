@@ -1,0 +1,36 @@
+created: 20260308120000000
+modified: 20260308120000000
+title: $:/plugins/rimir/explide/ide-templates/diagnostics/tab
+type: text/vnd.tiddlywiki
+
+\import $:/plugins/rimir/explide/variables
+
+<h2>Missing imported plugins</h2>
+
+<$list filter="[enlist{!!rri.imported-plugins}!is[tiddler]!is[shadow]]" emptyMessage="""<div class="rr-muted rr-small">All imported plugins are present.</div>""">
+<div class="rr-callout-warning">Missing: <$link/><br/></div>
+</$list>
+
+<h2>Missing imported tiddlers</h2>
+
+<$list filter="[function[rri.imported-tiddlers],<explideConfigTiddler>!is[tiddler]!is[shadow]]" emptyMessage="""<div class="rr-muted rr-small">All imported tiddlers are present.</div>""">
+<div class="rr-callout-warning">Missing: <$link/><br/></div>
+</$list>
+
+<h2>Unused imported plugins</h2>
+
+<$list filter="[enlist{!!rri.imported-plugins}]" variable="pluginTiddler">
+<%if [function[rri.is-any-plugin-member-used],<explideConfigTiddler>,<pluginTiddler>] +[count[]compare:number:eq[0]]%>
+<div class="rr-callout-info">Plugin ''<$text text=<<pluginTiddler>>/>'': imported but no shadow tiddlers used as explide data.</div>
+<%endif%>
+</$list>
+
+<h2>Stale snapshots</h2>
+
+<$list filter="[function[rri.explide-data],<explideConfigTiddler>]" variable="dataTiddler">
+<%if [{{{[<dataTiddler>addsuffix<snapshot-suffix>is[tiddler]]}}}]%>
+<%if [<dataTiddler>get[modified]compare:date:gt{{{[<dataTiddler>addsuffix<snapshot-suffix>get[modified]]}}}]%>
+<div class="rr-callout-info"><$text text={{{[<dataTiddler>removeprefix<explideConfigTiddler>removeprefix[/]]}}}/> — data is newer than its snapshot.</div>
+<%endif%>
+<%endif%>
+</$list>

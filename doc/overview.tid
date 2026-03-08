@@ -1,0 +1,49 @@
+created: 20260308120000000
+modified: 20260308120000000
+rdt.hub-category: development-tools
+rdt.hub-category-name: Development Tools
+rdt.hub-order: 5
+rdt.order: 1
+rdt.plugin-key: explide
+rdt.plugin-name: explide
+rdt.plugin-subtitle: Interactive testcase composition IDE
+rdt.section: Overview
+title: $:/plugins/rimir/explide/doc/overview
+type: text/vnd.tiddlywiki
+
+<$transclude $tiddler="$:/plugins/rimir/doc-template/templates/page">
+<$fill $name="body">
+
+!! What it does
+
+Explide turns config tiddlers into isolated `$testcase` sandboxes. You define which plugins and shadow tiddlers to include, override fields with the `$rri$:` prefix remapping, add ad-hoc tiddlers, and see the assembled result live — all without leaving the wiki.
+
+!! Features
+
+* ''Config-driven pipeline'' — each tiddler with `rri.type: explide/config` becomes a full IDE
+* ''Plugin import'' — import entire plugins or cherry-pick individual shadow tiddlers
+* ''Bulk import'' — import multiple tiddlers at once using a filter expression
+* ''`$rri$:` field remapping'' — override any field on explide data tiddlers without colliding with real fields
+* ''Field editor'' — FIELDS tab for adding, editing, and deleting `$rri$:` remapped fields
+* ''Ad-hoc tiddlers'' — create simple text-only tiddlers inline for quick prototyping
+* ''Snapshot & diff'' — take snapshots of explide data, compare changes, and restore previous states
+* ''Diagnostics'' — detect missing plugins, missing tiddlers, unused imports, and stale snapshots
+* ''Layout toggle'' — switch between stacked and side-by-side (config + preview) layout
+* ''Output tiddler'' — configurable testcase output (defaults to `Output`)
+* ''ViewTemplate integration'' — the IDE renders automatically when viewing a config tiddler
+
+!! Quick start
+
+# Create a new tiddler and set `rri.type` to `explide/config`
+# Open the CONFIG tab and import a plugin (e.g., `$:/plugins/rimir/components`)
+# Click the {{$:/core/images/new-button}} button next to a shadow tiddler to add it as explide data
+# Switch to the explide data tab to edit the overridden tiddler in the EDITOR
+# Create an ad-hoc tiddler named `Output` — this is what the testcase Output tab renders
+# Use DIFF to compare your changes against the original shadow tiddler or a snapshot
+
+<$transclude $tiddler="$:/plugins/rimir/doc-template/templates/callout" type="info">
+<$fill $name="body">Explide is pure wikitext — no JS modules, no server restart needed. All changes take effect immediately.</$fill>
+</$transclude>
+
+</$fill>
+</$transclude>

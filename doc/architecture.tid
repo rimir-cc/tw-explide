@@ -1,0 +1,64 @@
+created: 20260308120000000
+modified: 20260308120000000
+rdt.order: 2
+rdt.plugin-key: explide
+rdt.plugin-name: explide
+rdt.plugin-subtitle: Interactive testcase composition IDE
+rdt.section: Architecture
+title: $:/plugins/rimir/explide/doc/architecture
+type: text/vnd.tiddlywiki
+
+<$transclude $tiddler="$:/plugins/rimir/doc-template/templates/page">
+<$fill $name="body">
+
+!! Config structure
+
+An explide config tiddler has:
+
+|!Field |!Purpose |
+|`rri.type` |Must be `explide/config` — triggers ViewTemplate integration |
+|`rri.imported-plugins` |Space-separated list of plugin titles to import |
+|`rri.imported-tiddlers` |Space-separated list of individual tiddler titles to import |
+|`rri.output-tiddler` |Title of the tiddler to display in testcase Output (default: `Output`) |
+|`description` |Human-readable description shown in the testcase |
+|`rri.adhoc-tiddler:<name>` |Inline text-only tiddler content |
+
+!! Explide data tiddlers
+
+When you add a shadow tiddler from an imported plugin, a new tiddler is created at `<configTitle>/<shadowTitle>`. This is an "explide data" tiddler.
+
+!! `$rri$:` field prefix remapping
+
+Fields on explide data tiddlers that start with `$rri$:` are remapped when assembling the `$testcase`:
+
+* `$rri$:tags` on the data tiddler becomes `tags` in the sandbox
+* Regular fields (like `title`, `created`) are passed through as-is, except `title` which is stripped
+
+This allows overriding any field without colliding with TiddlyWiki's own field handling.
+
+!! `$genesis` pipeline
+
+The `$data` elements inside `$testcase` are assembled via `$genesis` with three named procedures:
+
+* `explide-data-title` — computes the sandbox title by stripping the config prefix
+* `explide-names` — merges regular field names with stripped `$rri$:` field names
+* `explide-values` — merges regular field values with `$rri$:` field values
+
+!! Testcase output
+
+The `$testcase` widget uses the `testcase-output-tiddler` attribute set to the value of `rri.output-tiddler` (defaulting to `Output`). By convention, create an ad-hoc tiddler named `Output` for the main rendered content.
+
+!! Snapshot system
+
+Each explide data tiddler can have a snapshot at `<dataTitle>:snapshot`. Snapshots are full copies created via `$action-createtiddler $template`. The DIFF tab compares the current data against its snapshot, or falls back to the original shadow tiddler. Restore overwrites the data tiddler from the snapshot.
+
+!! Ad-hoc tiddlers
+
+Fields prefixed with `rri.adhoc-tiddler:` on the config tiddler become standalone `$data` entries in the sandbox. Each becomes a simple text-only tiddler with the field suffix as its title.
+
+!! CSS consolidation
+
+Explide uses `rr-input-row`, `rr-input`, `rr-muted`, `rr-small`, `rr-callout-*` classes from the theme plugin. Plugin-specific styles (split layout, snapshot controls, config field label widths) are in `styles/base.css`.
+
+</$fill>
+</$transclude>

@@ -1,0 +1,19 @@
+code-body: yes
+created: 20260112152820989
+modified: 20260115153001834
+tags: 
+title: $:/plugins/rimir/explide/ide-templates/config/plugins/tabButton
+type: text/vnd.tiddlywiki
+
+\import $:/plugins/rimir/explide/variables
+\whitespace notrim
+
+<%if [function[rri.is-plugin-imported],<explideConfigTiddler>,<currentTab>]%>
+  ''<<currentTab>>''
+<%else%>
+  <%if [function[rri.is-any-plugin-member-used],<explideConfigTiddler>,<currentTab>]%>
+    //*** <<currentTab>> ***//
+  <%else%>
+    <<currentTab>>
+  <%endif%>
+<%endif%>

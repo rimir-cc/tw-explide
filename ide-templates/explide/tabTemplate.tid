@@ -1,0 +1,59 @@
+code-body: yes
+created: 20260112145907693
+modified: 20260115141421788
+tags: 
+title: $:/plugins/rimir/explide/ide-templates/explide/tabTemplate
+type: text/vnd.tiddlywiki
+
+\import $:/plugins/rimir/explide/variables
+
+<%if [<currentTab>match[EDITOR]]%>
+<$tiddler tiddler=<<explideDataTiddler>>>
+<$transclude $tiddler="$:/core/ui/EditTemplate/body"/>
+</$tiddler>
+<div class="explide-snapshot-controls">
+<%if [{{{[<explideDataTiddler>addsuffix<snapshot-suffix>is[tiddler]]}}}]%>
+<span class="rr-muted rr-small">Snapshot exists (modified: <$view tiddler={{{[<explideDataTiddler>addsuffix<snapshot-suffix>]}}} field="modified" format="date" template="YYYY-0MM-0DD 0hh:0mm"/>)</span>
+<%else%>
+<span class="rr-muted rr-small">No snapshot</span>
+<%endif%>
+<$button class="tc-btn-invisible tc-tiddlylink" actions="""
+<$action-createtiddler $template=<<explideDataTiddler>> $basetitle={{{[<explideDataTiddler>addsuffix<snapshot-suffix>]}}} $overwrite="yes"/>
+""">{{$:/core/images/save-button}} Take Snapshot</$button>
+<%if [{{{[<explideDataTiddler>addsuffix<snapshot-suffix>is[tiddler]]}}}]%>
+<$reveal type="nomatch" stateTitle={{{[<explideDataTiddler>addsuffix[/state/confirm-restore]]}}} text="yes">
+<$button class="tc-btn-invisible tc-tiddlylink" actions="""<$action-setfield $tiddler={{{[<explideDataTiddler>addsuffix[/state/confirm-restore]]}}} text="yes"/>""">{{$:/core/images/refresh-button}} Restore from Snapshot</$button>
+</$reveal>
+<$reveal type="match" stateTitle={{{[<explideDataTiddler>addsuffix[/state/confirm-restore]]}}} text="yes">
+<span class="rr-muted"> Are you sure? </span>
+<$button class="tc-btn-invisible tc-tiddlylink" actions="""
+<$action-createtiddler $template={{{[<explideDataTiddler>addsuffix<snapshot-suffix>]}}} $basetitle=<<explideDataTiddler>> $overwrite="yes"/>
+<$action-setfield $tiddler={{{[<explideDataTiddler>addsuffix[/state/confirm-restore]]}}} text="no"/>
+""">Yes</$button>
+<$button class="tc-btn-invisible tc-tiddlylink" actions="""<$action-setfield $tiddler={{{[<explideDataTiddler>addsuffix[/state/confirm-restore]]}}} text="no"/>""">No</$button>
+</$reveal>
+<%endif%>
+</div>
+<%elseif [<currentTab>match[FIELDS]]%>
+<div class="explide-field-editor">
+''Remapped fields'' <span class="rr-muted rr-small">(stored as `$rri$:<name>`, remapped to `<name>` in sandbox)</span>
+<$list filter="[<explideDataTiddler>fields[]prefix<rri-field-prefix>sort[]]" variable="fieldName">
+<div class="rr-input-row">
+<span class="rr-muted">{{{[<fieldName>removeprefix<rri-field-prefix>]}}}</span>
+<$edit-text tiddler=<<explideDataTiddler>> field=<<fieldName>> tag="input" class="rr-input"/>
+<$button class="tc-btn-invisible" actions="""<$action-deletefield $tiddler=<<explideDataTiddler>> $field=<<fieldName>>/>""">{{$:/core/images/delete-button}}</$button>
+</div>
+</$list>
+<div class="rr-input-row">
+<$edit-text tiddler="$:/state/rimir/explide/new-field-name" tag="input" placeholder="field name" class="rr-input"/>
+<$button class="tc-btn-invisible" actions="""
+<$action-setfield $tiddler=<<explideDataTiddler>> $field={{{[{$:/state/rimir/explide/new-field-name}addprefix<rri-field-prefix>]}}} $value=""/>
+<$action-setfield $tiddler="$:/state/rimir/explide/new-field-name" text=""/>
+""">{{$:/core/images/new-button}} Add field</$button>
+</div>
+</div>
+<%elseif [<currentTab>match[DIFF]]%>
+<$transclude $tiddler="$:/plugins/rimir/utils/diff/DiffWithTiddlerOrShadow" tiddler={{{[function[rri.get-snapshot-data],<explideConfigTiddler>,<explideDataTiddler>]:else[function[rri.get-source-data]]}}} secondTiddler=<<explideDataTiddler>>/>
+<%else%>
+UNKNOWN TAB (EXPLIDE)
+<%endif%>

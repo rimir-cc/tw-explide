@@ -1,0 +1,10 @@
+code-body: yes
+created: 20260114125322673
+modified: 20260114135002822
+tags: 
+title: $:/plugins/rimir/explide/ide-templates/adhoc-tiddlers/tabButton
+type: text/vnd.tiddlywiki
+
+\import $:/plugins/rimir/explide/variables
+
+{{{[<currentTab>removeprefix<adhoc-field-prefix>]}}}

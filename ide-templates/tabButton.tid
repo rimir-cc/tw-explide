@@ -1,0 +1,16 @@
+code-body: yes
+created: 20260112143632087
+modified: 20260114131613889
+tags: 
+title: $:/plugins/rimir/explide/ide-templates/tabButton
+type: text/vnd.tiddlywiki
+
+\import $:/plugins/rimir/explide/variables
+
+<%if [<currentTab>match[CONFIG]]%>
+CONFIG
+<%elseif [function[rri.is-explide-data],<explideConfigTiddler>,<currentTab>]%>
+X {{{[function[rri.get-source-data],<explideConfigTiddler>,<currentTab>]}}}
+<%else%>
+<<currentTab>>
+<%endif%>

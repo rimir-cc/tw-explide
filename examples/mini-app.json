@@ -1,0 +1,12 @@
+[
+    {
+        "created": "20260308120000000",
+        "modified": "20260308120000000",
+        "title": "$:/plugins/rimir/explide/examples/mini-app",
+        "type": "text/vnd.tiddlywiki",
+        "description": "Mini app — counter with state, demonstrating adhoc tiddlers",
+        "rri.type": "explide/config",
+        "rri.adhoc-tiddler:Output": "\\define increment()\n<$action-setfield $tiddler=\"$:/state/counter\" text={{{[{$:/state/counter}add[1]]}}}/>\n\\end\n\n\\define reset()\n<$action-setfield $tiddler=\"$:/state/counter\" text=\"0\"/>\n\\end\n\n! Counter: {{{[{$:/state/counter}else[0]]}}}\n\n<$button actions=<<increment>>>+1</$button>\n<$button actions=<<reset>>>Reset</$button>",
+        "rri.adhoc-tiddler:README": "This is a minimal counter app built entirely with adhoc tiddlers inside an explide sandbox.\n\nIt demonstrates:\n* State management with `$:/state/` tiddlers\n* Action widgets (`$action-setfield`)\n* Filtered transclusion (`{{{ }}}`)\n\nOpen the ''ADHOC'' tab to edit the source."
+    }
+]

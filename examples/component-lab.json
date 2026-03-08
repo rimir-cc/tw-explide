@@ -1,0 +1,12 @@
+[
+    {
+        "created": "20260308120000000",
+        "modified": "20260308120000000",
+        "title": "$:/plugins/rimir/explide/examples/component-lab",
+        "type": "text/vnd.tiddlywiki",
+        "description": "Components lab — experiment with pills facades",
+        "rri.type": "explide/config",
+        "rri.imported-plugins": "$:/plugins/rimir/components $:/plugins/rimir/theme",
+        "rri.adhoc-tiddler:Output": "! Components Lab\n\n!! Pills (multi-select)\n\n<$transclude $tiddler=\"$:/plugins/rimir/components/pills\"\n  elements=\"Alpha Beta Gamma Delta\"\n  selection=\"multi\"/>\n\n!! Pills (single-select)\n\n<$transclude $tiddler=\"$:/plugins/rimir/components/pills\"\n  elements=\"Red Green Blue\"\n  selection=\"single\"/>\n\n!! Custom content\n\nTry editing this tiddler in the ADHOC tab to experiment with different component configurations."
+    }
+]

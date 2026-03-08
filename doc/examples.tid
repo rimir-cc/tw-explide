@@ -1,0 +1,70 @@
+created: 20260308120000000
+modified: 20260308120000000
+rdt.order: 4
+rdt.plugin-key: explide
+rdt.plugin-name: explide
+rdt.plugin-subtitle: Interactive testcase composition IDE
+rdt.section: Examples
+title: $:/plugins/rimir/explide/doc/examples
+type: text/vnd.tiddlywiki
+
+<$transclude $tiddler="$:/plugins/rimir/doc-template/templates/page">
+<$fill $name="body">
+
+!! Bundled examples
+
+Three examples ship with the plugin:
+
+* [[$:/plugins/rimir/explide/examples/callout-sandbox]] — imports the theme plugin, renders all four callout types
+* [[$:/plugins/rimir/explide/examples/mini-app]] — counter app with `+1`/`Reset` buttons using state management
+* [[$:/plugins/rimir/explide/examples/component-lab]] — imports components + theme, demonstrates pills facades
+
+Each uses an ad-hoc tiddler named `Output` as the testcase display tiddler.
+
+!! Creating a config tiddler
+
+# Create a new tiddler (e.g., `My Test`)
+# Add the field `rri.type` with value `explide/config`
+# Save — the IDE interface appears automatically
+
+!! Importing a plugin
+
+# Open the CONFIG tab
+# Find your plugin in the vertical list (e.g., `$:/plugins/rimir/components`)
+# Check "Include Plugin into Explide?" to import the whole plugin
+# Click {{$:/core/images/new-button}} next to individual shadow tiddlers to add them as explide data
+# Use the "Bulk import from filter" slider for batch imports
+
+!! Setting up the Output tiddler
+
+# Switch to the ADHOC tab
+# Create a tiddler named `Output`
+# Write your wikitext content — this is what the testcase Output tab renders
+# To use a different name, set `rri.output-tiddler` in the configuration
+
+!! Using `$rri$:` field remapping
+
+When editing an explide data tiddler in the FIELDS tab:
+
+* Add a field named `tags` — this stores `$rri$:tags` on the data tiddler
+* In the assembled testcase, the `$rri$:tags` field is remapped to plain `tags`
+* This lets you override any field without interfering with TiddlyWiki's field handling
+
+!! Snapshot workflow
+
+# Open an explide data tab and switch to EDITOR
+# Click "Take Snapshot" to save the current state
+# Make changes to the tiddler
+# Switch to DIFF to see what changed since the snapshot
+# Click "Restore from Snapshot" to revert to the saved state
+
+!! Using diagnostics
+
+Switch to the DIAGNOSTICS tab to check for:
+
+* Missing imported plugins or tiddlers
+* Imported plugins with no shadow tiddlers used
+* Snapshots that are older than the current data
+
+</$fill>
+</$transclude>

@@ -1,0 +1,20 @@
+code-body: yes
+created: 20260114125315007
+modified: 20260115095959160
+tags: 
+title: $:/plugins/rimir/explide/ide-templates/adhoc-tiddlers/tab
+type: text/vnd.tiddlywiki
+
+<div class="rri-adhoc-field">
+<$vars 
+	currentAdhocField=<<currentTab>>
+	currentAdhocSourceField={{{[<currentTab>removeprefix<adhoc-field-prefix>addprefix<adhoc-src-field-prefix>]}}}
+>
+Field ''<<currentAdhocField>>'' <$button actions="""<$action-deletefield $tiddler=<<explideConfigTiddler>> $field=<<currentAdhocField>>/>""" class="tc-btn-invisible">{{$:/core/images/delete-button}}</$button><p/>
+<%if [<explideConfigTiddler>has<currentAdhocSourceField>]%>
+
+: Source: {{{[<explideConfigTiddler>get<currentAdhocSourceField>]}}} <$button actions="""<$rr.diff src={{{[<explideConfigTiddler>get<currentAdhocSourceField>get[text]]}}} dest={{{[<explideConfigTiddler>get<currentAdhocField>]}}}/>""">diff</$button>
+<%endif%>
+<$edit-text tiddler=<<explideConfigTiddler>> field=<<currentAdhocField>> tag="textarea"/>
+</$vars>
+</div>

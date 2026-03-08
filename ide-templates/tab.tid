@@ -1,0 +1,39 @@
+code-body: yes
+created: 20260112144254859
+modified: 20260119140051501
+tags: 
+title: $:/plugins/rimir/explide/ide-templates/tab
+type: text/vnd.tiddlywiki
+
+\import $:/plugins/rimir/explide/variables
+
+\procedure rr.state() $:/state/rimir/explide/ide-tab
+\procedure rr.new-adhoc-name() additionalTiddlers
+
+<%if [<currentTab>match[CONFIG]]%>
+''Configure plugin-explide's''
+<$transclude $variable=tabs tabsList="[plugin-type[plugin]]-[[$:/core]]:sort:number[function[rri.is-plugin-involved],<explideConfigTiddler>,<currentTiddler>then[1]else[2]]" template="$:/plugins/rimir/explide/ide-templates/config/plugins/tab" buttonTemplate="$:/plugins/rimir/explide/ide-templates/config/plugins/tabButton" class="tc-vertical"/>
+
+<%elseif [<currentTab>match[ADHOC]]%>
+''Define adhoc (text-only) Tiddlers''
+
+<$edit-text tiddler=<<rr.state>> tag="input"/> <$button actions="""<$action-setfield $tiddler=<<explideConfigTiddler>> $field={{{[<rr.state>get[text]addprefix<adhoc-field-prefix>]}}} $value=""/>""" class="tc-btn-invisible">{{$:/core/images/new-button}}</$button>
+
+<$transclude $variable=tabs tabsList="[<explideConfigTiddler>fields[]prefix<adhoc-field-prefix>]" template="$:/plugins/rimir/explide/ide-templates/adhoc-tiddlers/tab" buttonTemplate="$:/plugins/rimir/explide/ide-templates/adhoc-tiddlers/tabButton" class="tc-vertical"/>
+
+<%elseif [<currentTab>match[DIAGNOSTICS]]%>
+<$transclude $tiddler="$:/plugins/rimir/explide/ide-templates/diagnostics/tab"/>
+
+<%elseif [function[rri.is-explide-data],<explideConfigTiddler>,<currentTab>]%>
+<$set name="explideDataTiddler" value=<<currentTab>>>
+''Modify explide data: <$link to=<<explideDataTiddler>>><$view tiddler=<<explideDataTiddler>> field="title"/></$link>''
+<$transclude $variable=tabs tabsList="EDITOR FIELDS DIFF" template="$:/plugins/rimir/explide/ide-templates/explide/tabTemplate" class="tc-vertical" default="EDITOR"/>
+</$set>
+
+<%else%>
+<$tiddler tiddler=<<currentTab>>>
+''Modify testdata <$link/>''
+<$transclude $tiddler="$:/core/ui/EditTemplate/body"/>
+</$tiddler>
+
+<%endif%>
