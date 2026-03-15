@@ -25,10 +25,10 @@ type: text/vnd.tiddlywiki
 <$transclude $tiddler="$:/plugins/rimir/explide/ide-templates/diagnostics/tab"/>
 
 <%elseif [function[rri.is-explide-data],<explideConfigTiddler>,<currentTab>]%>
-<$set name="explideDataTiddler" value=<<currentTab>>>
+<$let explideDataTiddler=<<currentTab>>>
 ''Modify explide data: <$link to=<<explideDataTiddler>>><$view tiddler=<<explideDataTiddler>> field="title"/></$link>''
 <$transclude $variable=tabs tabsList="EDITOR FIELDS DIFF" template="$:/plugins/rimir/explide/ide-templates/explide/tabTemplate" class="tc-vertical" default="EDITOR"/>
-</$set>
+</$let>
 
 <%else%>
 <$tiddler tiddler=<<currentTab>>>
