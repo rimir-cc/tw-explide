@@ -1,0 +1,11 @@
+{
+    "description": "Test edition for explide",
+    "plugins": [
+        "tiddlywiki/jasmine",
+        "rimir/explide"
+    ],
+    "themes": [
+        "tiddlywiki/vanilla",
+        "tiddlywiki/snowwhite"
+    ]
+}

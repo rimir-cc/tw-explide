@@ -1,0 +1,39 @@
+title: $:/plugins/rimir/explide/test/test-procedures
+description: Test explide helper functions for data resolution
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: MyExplideConfig
+rri.imported-tiddlers: Tiddler1 Tiddler2
+type: text/vnd.tiddlywiki
+
+Explide config
++
+title: MyExplideConfig/Tiddler1
+type: text/vnd.tiddlywiki
+
+Content of tiddler 1
++
+title: MyExplideConfig/Tiddler2
+type: text/vnd.tiddlywiki
+
+Content of tiddler 2
++
+title: Output
+
+\whitespace trim
+\function rri.pathy-children(tiddler) [prefix<tiddler>]-[<tiddler>]
+\function rri.imported-tiddlers(explideConfigTiddler) [<explideConfigTiddler>get[rri.imported-tiddlers]enlist-input[]]
+\function rri.explide-data(explideConfigTiddler) [function[rri.pathy-children],<explideConfigTiddler>]
+\function rri.explide-tiddlers(explideConfigTiddler) [function[rri.explide-data],<explideConfigTiddler>removeprefix<explideConfigTiddler>removeprefix[/]]
+\function rri.get-source-data(explideConfigTiddler, explideDataTiddler) [<explideDataTiddler>removeprefix<explideConfigTiddler>removeprefix[/]]
+
+imported:<$text text={{{ [function[rri.imported-tiddlers],[MyExplideConfig]count[]] }}}/>,data:<$text text={{{ [function[rri.explide-data],[MyExplideConfig]count[]] }}}/>,names:<$text text={{{ [function[rri.explide-tiddlers],[MyExplideConfig]sort[]join[,]] }}}/>,src:<$text text={{{ [function[rri.get-source-data],[MyExplideConfig],[MyExplideConfig/Tiddler1]] }}}/>
++
+title: ExpectedResult
+
+<p>imported:2,data:2,names:Tiddler1,Tiddler2,src:Tiddler1</p>
++
+title: Narrative
+
+Verifies explide helper functions resolve imported tiddlers, data children, names, and source data correctly.
