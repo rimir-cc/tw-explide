@@ -1,0 +1,39 @@
+created: 20260315120000000
+modified: 20260315120000000
+rdt.order: 7
+rdt.plugin-key: explide
+rdt.plugin-name: explide
+rdt.plugin-subtitle: Interactive testcase composition IDE
+rdt.section: TW Internals
+title: $:/plugins/rimir/explide/doc/tw-internals
+type: text/vnd.tiddlywiki
+
+<$transclude $tiddler="$:/plugins/rimir/doc-template/templates/page">
+<$fill $name="body">
+
+!! $testcase widget
+
+The core of explide. `$testcase` creates an isolated sandbox wiki with its own tiddler store. Child `$data` elements define the tiddlers available in the sandbox. The `testcase-output-tiddler` attribute controls which sandbox tiddler is rendered in the Output tab.
+
+!! $genesis widget
+
+Used to dynamically create `$data` elements inside `$testcase`. Explide uses `$genesis` with computed attributes to assemble data tiddlers with remapped `$rri$:` fields at render time, avoiding the need for static markup per tiddler.
+
+!! $data widget
+
+Child of `$testcase` — defines a single tiddler in the sandbox. Attributes become tiddler fields. Explide generates one `$data` per imported shadow tiddler, explide data tiddler, and ad-hoc tiddler.
+
+!! ViewTemplate integration
+
+The file `core-integration/ViewTemplate.tid` is tagged `$:/tags/ViewTemplate`. It uses a conditional check (`rri.type` = `explide/config`) to inject the IDE below the tiddler body. This is the standard TiddlyWiki pattern for extending how tiddlers render.
+
+!! Shadow tiddler enumeration
+
+Explide uses `[all[shadows]prefix<pluginTitle>]` to enumerate a plugin's shadow tiddlers. The `all[shadows]` operator returns tiddlers that come from installed plugins — these are read-only until overridden by a real tiddler with the same title.
+
+!! code-body: yes
+
+Used on `variables.tid` to tell TiddlyWiki to parse the body as function/procedure definitions rather than renderable wikitext.
+
+</$fill>
+</$transclude>

@@ -1,0 +1,31 @@
+created: 20260315120000000
+modified: 20260315120000000
+rdt.order: 5
+rdt.plugin-key: explide
+rdt.plugin-name: explide
+rdt.plugin-subtitle: Interactive testcase composition IDE
+rdt.section: FAQ
+title: $:/plugins/rimir/explide/doc/faq
+type: text/vnd.tiddlywiki
+
+<$transclude $tiddler="$:/plugins/rimir/doc-template/templates/page">
+<$fill $name="body">
+
+!! Q: Why does the IDE not appear when I view my tiddler?
+
+The IDE renders via a ViewTemplate integration that checks for `rri.type: explide/config`. Make sure:
+
+* The field name is exactly `rri.type` (not `type` or `rri-type`)
+* The value is exactly `explide/config`
+* The server was restarted after installing the plugin (ViewTemplate is a shadow tiddler)
+
+!! Q: My imported plugin's shadow tiddlers are not showing up. What's wrong?
+
+The plugin must be listed in `tiddlywiki.info` and loaded by the server. Explide reads shadow tiddlers from the wiki store — it cannot import plugins that are not installed. Check that the plugin title in `rri.imported-plugins` matches exactly (e.g., `$:/plugins/rimir/components`).
+
+!! Q: Can I use explide with single-file wikis (no Node.js server)?
+
+Yes. Explide is 100% wikitext with no JS modules or server-side code. It works in any TiddlyWiki environment. However, you need the theme and components plugins installed as dependencies.
+
+</$fill>
+</$transclude>

@@ -1,0 +1,59 @@
+created: 20260315120000000
+modified: 20260315120000000
+rdt.order: 6
+rdt.plugin-key: explide
+rdt.plugin-name: explide
+rdt.plugin-subtitle: Interactive testcase composition IDE
+rdt.section: Reference
+title: $:/plugins/rimir/explide/doc/reference
+type: text/vnd.tiddlywiki
+
+<$transclude $tiddler="$:/plugins/rimir/doc-template/templates/page">
+<$fill $name="body">
+
+!! Config tiddler fields
+
+|!Field |!Type |!Description |
+|`rri.type` |string |Must be `explide/config` to trigger the IDE |
+|`rri.imported-plugins` |space-separated list |Plugin titles to import into the sandbox |
+|`rri.imported-tiddlers` |space-separated list |Individual tiddler titles to import |
+|`rri.output-tiddler` |string |Title of the testcase output tiddler (default: `Output`) |
+|`description` |string |Description shown in the testcase header |
+|`rri.adhoc-tiddler:<name>` |string |Inline text-only tiddler content (name becomes the sandbox title) |
+
+!! Explide data tiddler convention
+
+When a shadow tiddler is added from an imported plugin, a data tiddler is created at:
+
+```
+<configTitle>/<shadowTiddlerTitle>
+```
+
+!! `$rri$:` field prefix
+
+Fields on data tiddlers prefixed with `$rri$:` are remapped in the sandbox:
+
+|!Data tiddler field |!Sandbox field |
+|`$rri$:tags` |`tags` |
+|`$rri$:type` |`type` |
+|`$rri$:<fieldname>` |`<fieldname>` |
+
+Regular fields (except `title`) pass through unchanged.
+
+!! Filter functions (`variables.tid`)
+
+|!Function |!Purpose |
+|`rri.config-data-filter` |Lists all explide data tiddlers for a config |
+|`rri.imported-shadow-filter` |Lists shadow tiddlers from imported plugins |
+|`rri.adhoc-names` |Extracts ad-hoc tiddler names from config fields |
+
+!! IDE tabs
+
+|!Tab |!Content |
+|CONFIG |Plugin import toggles, shadow tiddler browser, bulk import |
+|ADHOC |Ad-hoc tiddler editor (create/edit/delete inline tiddlers) |
+|DIAGNOSTICS |Missing plugins, missing tiddlers, unused imports, stale snapshots |
+|`<data title>` |One tab per explide data tiddler — EDITOR, FIELDS, DIFF sub-tabs |
+
+</$fill>
+</$transclude>
