@@ -8,7 +8,6 @@ type: text/vnd.tiddlywiki
 \import $:/plugins/rimir/explide/variables
 
 \procedure rr.state() $:/state/rimir/explide/ide-tab
-\procedure rr.new-adhoc-name() additionalTiddlers
 
 <%if [<currentTab>match[CONFIG]]%>
 ''Configure plugin-explide's''

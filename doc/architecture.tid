@@ -56,6 +56,8 @@ Each explide data tiddler can have a snapshot at `<dataTitle>:snapshot`. Snapsho
 
 Fields prefixed with `rri.adhoc-tiddler:` on the config tiddler become standalone `$data` entries in the sandbox. Each becomes a simple text-only tiddler with the field suffix as its title.
 
+An optional companion field `rri.adhoc-tiddler-src:<name>` stores a tiddler title whose text is used as the diff source. When present, the ADHOC tab shows a toggle to compare the ad-hoc content against the source tiddler's text using `$diff-text`.
+
 !! CSS consolidation
 
 Explide uses `rr-input-row`, `rr-input`, `rr-muted`, `rr-small`, `rr-callout-*` classes from the theme plugin. Plugin-specific styles (split layout, snapshot controls, config field label widths) are in `styles/base.css`.

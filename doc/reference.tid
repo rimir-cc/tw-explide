@@ -20,6 +20,7 @@ type: text/vnd.tiddlywiki
 |`rri.output-tiddler` |string |Title of the testcase output tiddler (default: `Output`) |
 |`description` |string |Description shown in the testcase header |
 |`rri.adhoc-tiddler:<name>` |string |Inline text-only tiddler content (name becomes the sandbox title) |
+|`rri.adhoc-tiddler-src:<name>` |string |Optional source tiddler title for ad-hoc diff comparison |
 
 !! Explide data tiddler convention
 
@@ -62,6 +63,7 @@ Regular fields (except `title`) pass through unchanged.
 |ADHOC |Ad-hoc tiddler editor (create/edit/delete inline tiddlers) |
 |DIAGNOSTICS |Missing plugins, missing tiddlers, unused imports, stale snapshots |
 |`<data title>` |One tab per explide data tiddler — EDITOR, FIELDS, DIFF sub-tabs |
+|`<imported tiddler>` |One tab per individually imported tiddler — direct body editor |
 
 </$fill>
 </$transclude>
