@@ -43,9 +43,14 @@ Regular fields (except `title`) pass through unchanged.
 !! Filter functions (`variables.tid`)
 
 |!Function |!Purpose |
-|`rri.config-data-filter` |Lists all explide data tiddlers for a config |
-|`rri.imported-shadow-filter` |Lists shadow tiddlers from imported plugins |
-|`rri.adhoc-names` |Extracts ad-hoc tiddler names from config fields |
+|`rri.explide-data(config)` |Lists all explide data tiddlers for a config (children minus snapshots) |
+|`rri.explide-tiddlers(config)` |Explide data titles with config prefix stripped (original names) |
+|`rri.imported-tiddlers(config)` |Lists individually imported tiddler titles from `rri.imported-tiddlers` field |
+|`rri.get-source-data(config, data)` |Computes original tiddler name from a data tiddler title |
+|`rri.get-snapshot-data(config, data)` |Resolves snapshot tiddler or falls back to original |
+|`rri.is-plugin-imported(config, plugin)` |Checks if a plugin is in the imported list |
+|`rri.is-any-plugin-member-used(config, plugin)` |Checks if any shadow tiddler from a plugin is used as explide data |
+|`rri.is-plugin-involved(config, plugin)` |Checks if a plugin is imported or has used shadow tiddlers |
 
 !! IDE tabs
 
