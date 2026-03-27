@@ -25,6 +25,13 @@ type: text/vnd.tiddlywiki
 |`ide-templates/diagnostics/tab.tid` |Diagnostics checks (missing, unused, stale) |
 |`examples/*.json` |Bundled example config tiddlers |
 |`styles/base.css` |Plugin-specific styles (extends `rr-*` from theme) |
+|`doc/overview.tid` |Doc-template overview page |
+|`doc/architecture.tid` |Architecture documentation |
+|`doc/dev-workflow.tid` |Dev workflow and plugin files reference |
+|`doc/examples.tid` |Usage examples documentation |
+|`doc/faq.tid` |Frequently asked questions |
+|`doc/reference.tid` |Config fields, filter functions, IDE tabs reference |
+|`doc/tw-internals.tid` |TiddlyWiki internals used by explide |
 
 !! Restart rules
 

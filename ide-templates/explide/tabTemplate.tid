@@ -53,7 +53,7 @@ type: text/vnd.tiddlywiki
 </div>
 </div>
 <%elseif [<currentTab>match[DIFF]]%>
-<$transclude $tiddler="$:/plugins/rimir/utils/diff/DiffWithTiddlerOrShadow" tiddler={{{[function[rri.get-snapshot-data],<explideConfigTiddler>,<explideDataTiddler>]:else[function[rri.get-source-data]]}}} secondTiddler=<<explideDataTiddler>>/>
+<$diff-text source={{{[function[rri.get-snapshot-data],<explideConfigTiddler>,<explideDataTiddler>] :map[get[text]]}}} dest={{{[<explideDataTiddler>get[text]]}}}/>
 <%else%>
 UNKNOWN TAB (EXPLIDE)
 <%endif%>

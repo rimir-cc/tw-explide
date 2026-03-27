@@ -6,6 +6,7 @@ type: text/vnd.tiddlywiki
 ! Changelog
 
 |!Version |!Date |!Changes |
+|v0.1.5 |2026-03-27 |Fix broken DIFF tab (use $diff-text), fix adhoc diff button, fix adhoc name input state bug, update docs |
 |v0.1.4 |2026-03-27 |Fix reference doc: correct filter function names to match variables.tid |
 |v0.1.3 |2026-03-15 |Add missing doc tiddlers (faq, reference, tw-internals) |
 |v0.1.2 |2026-03-15 |Replace nested $set with $let in IDE templates |

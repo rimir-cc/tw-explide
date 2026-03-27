@@ -13,7 +13,14 @@ type: text/vnd.tiddlywiki
 Field ''<<currentAdhocField>>'' <$button actions="""<$action-deletefield $tiddler=<<explideConfigTiddler>> $field=<<currentAdhocField>>/>""" class="tc-btn-invisible">{{$:/core/images/delete-button}}</$button><p/>
 <%if [<explideConfigTiddler>has<currentAdhocSourceField>]%>
 
-: Source: {{{[<explideConfigTiddler>get<currentAdhocSourceField>]}}} <$button actions="""<$rr.diff src={{{[<explideConfigTiddler>get<currentAdhocSourceField>get[text]]}}} dest={{{[<explideConfigTiddler>get<currentAdhocField>]}}}/>""">diff</$button>
+: Source: {{{[<explideConfigTiddler>get<currentAdhocSourceField>]}}}
+<$reveal type="nomatch" stateTitle={{{[<currentAdhocField>addprefix[$:/state/rimir/explide/diff/]]}}} text="yes">
+<$button class="tc-btn-invisible tc-tiddlylink" actions="""<$action-setfield $tiddler={{{[<currentAdhocField>addprefix[$:/state/rimir/explide/diff/]]}}} text="yes"/>""">show diff</$button>
+</$reveal>
+<$reveal type="match" stateTitle={{{[<currentAdhocField>addprefix[$:/state/rimir/explide/diff/]]}}} text="yes">
+<$button class="tc-btn-invisible tc-tiddlylink" actions="""<$action-setfield $tiddler={{{[<currentAdhocField>addprefix[$:/state/rimir/explide/diff/]]}}} text="no"/>""">hide diff</$button>
+<$diff-text source={{{[<explideConfigTiddler>get<currentAdhocSourceField>get[text]]}}} dest={{{[<explideConfigTiddler>get<currentAdhocField>]}}}/>
+</$reveal>
 <%endif%>
 <$edit-text tiddler=<<explideConfigTiddler>> field=<<currentAdhocField>> tag="textarea"/>
 </$vars>

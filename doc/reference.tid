@@ -43,9 +43,12 @@ Regular fields (except `title`) pass through unchanged.
 !! Filter functions (`variables.tid`)
 
 |!Function |!Purpose |
+|`rri.pathy-children(tiddler)` |Finds child tiddlers by prefix (excluding the tiddler itself) |
+|`rri.imported-tiddlers(config)` |Lists individually imported tiddler titles from `rri.imported-tiddlers` field |
 |`rri.explide-data(config)` |Lists all explide data tiddlers for a config (children minus snapshots) |
 |`rri.explide-tiddlers(config)` |Explide data titles with config prefix stripped (original names) |
-|`rri.imported-tiddlers(config)` |Lists individually imported tiddler titles from `rri.imported-tiddlers` field |
+|`rri.is-explide-data(config, tiddler)` |Checks if a tiddler is explide data for the given config |
+|`rri.is-explide-tiddler(config, tiddler)` |Checks if a tiddler matches any explide data entry |
 |`rri.get-source-data(config, data)` |Computes original tiddler name from a data tiddler title |
 |`rri.get-snapshot-data(config, data)` |Resolves snapshot tiddler or falls back to original |
 |`rri.is-plugin-imported(config, plugin)` |Checks if a plugin is in the imported list |

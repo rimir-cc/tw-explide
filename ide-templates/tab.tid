@@ -17,7 +17,7 @@ type: text/vnd.tiddlywiki
 <%elseif [<currentTab>match[ADHOC]]%>
 ''Define adhoc (text-only) Tiddlers''
 
-<$edit-text tiddler=<<rr.state>> tag="input"/> <$button actions="""<$action-setfield $tiddler=<<explideConfigTiddler>> $field={{{[<rr.state>get[text]addprefix<adhoc-field-prefix>]}}} $value=""/>""" class="tc-btn-invisible">{{$:/core/images/new-button}}</$button>
+<$edit-text tiddler="$:/state/rimir/explide/new-adhoc-name" tag="input"/> <$button actions="""<$action-setfield $tiddler=<<explideConfigTiddler>> $field={{{[{$:/state/rimir/explide/new-adhoc-name}addprefix<adhoc-field-prefix>]}}} $value=""/><$action-setfield $tiddler="$:/state/rimir/explide/new-adhoc-name" text=""/>""" class="tc-btn-invisible">{{$:/core/images/new-button}}</$button>
 
 <$transclude $variable=tabs tabsList="[<explideConfigTiddler>fields[]prefix<adhoc-field-prefix>]" template="$:/plugins/rimir/explide/ide-templates/adhoc-tiddlers/tab" buttonTemplate="$:/plugins/rimir/explide/ide-templates/adhoc-tiddlers/tabButton" class="tc-vertical"/>
 

@@ -29,7 +29,11 @@ The file `core-integration/ViewTemplate.tid` is tagged `$:/tags/ViewTemplate`. I
 
 !! Shadow tiddler enumeration
 
-Explide uses `[all[shadows]prefix<pluginTitle>]` to enumerate a plugin's shadow tiddlers. The `all[shadows]` operator returns tiddlers that come from installed plugins — these are read-only until overridden by a real tiddler with the same title.
+Explide uses `[<pluginTiddler>plugintiddlers[]sort[]]` to enumerate a plugin's shadow tiddlers. The `plugintiddlers` operator lists all tiddlers bundled inside a plugin — these are read-only shadow tiddlers until overridden by a real tiddler with the same title.
+
+!! $diff-text widget
+
+TW core widget used by the DIFF sub-tab and adhoc diff toggle. Takes `source` and `dest` text attributes and renders a visual inline diff.
 
 !! code-body: yes
 
