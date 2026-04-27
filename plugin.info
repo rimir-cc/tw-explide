@@ -2,11 +2,14 @@
     "title": "$:/plugins/rimir/explide",
     "description": "Interactive testcase composition IDE",
     "author": "rimir",
-    "version": "0.1.6",
+    "version": "0.1.7",
     "core-version": ">=5.3.0",
     "source": "https://github.com/rimir-cc/tw-explide",
     "name": "explide",
     "plugin-type": "plugin",
-    "dependents": "$:/plugins/rimir/theme,$:/plugins/rimir/components,$:/plugins/kookma/shiraz",
+    "dependents": "$:/plugins/rimir/theme $:/plugins/rimir/components $:/plugins/kookma/shiraz",
+    "soft-dependents": [
+        "$:/plugins/rimir/doc-template"
+    ],
     "list": "readme documentation settings examples changelog license"
 }
